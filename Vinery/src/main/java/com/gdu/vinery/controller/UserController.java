@@ -20,7 +20,6 @@ import com.gdu.vinery.service.UserService;
 @Controller
 public class UserController {
 	
-	// 이것도 올라가나요 ?
 	
 	@Autowired
 	private UserService userService;
