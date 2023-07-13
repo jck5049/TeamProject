@@ -12,31 +12,31 @@ import org.springframework.web.servlet.HandlerInterceptor;
 @Component
 public class PreventLoginInterceptor implements HandlerInterceptor {
 	
-		// ·Î±×ÀÎÀÌ µÇ¾î ÀÖ´Â »óÅÂ¿¡¼­
-		// ´Ù½Ã ·Î±×ÀÎ ÆäÀÌÁö·Î ÀÌµ¿, È¸¿ø °¡ÀÔ ÆäÀÌÁö·Î ÀÌµ¿À» ¸·´Â ÀÎÅÍ¼ÁÅÍ
+	  // ë¡œê·¸ì¸ì´ ë˜ì–´ ìˆëŠ” ìƒíƒœì—ì„œ
+	  // ë‹¤ì‹œ ë¡œê·¸ì¸ í˜ì´ì§€ë¡œ ì´ë™, íšŒì› ê°€ì… í˜ì´ì§€ë¡œ ì´ë™ì„ ë§‰ëŠ” ì¸í„°ì…‰í„°
 		
 		@Override
 		public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 			
 			HttpSession session = request.getSession();
 			
-			// ·Î±×ÀÎ ¿©ºÎ È®ÀÎ
+			// ë¡œê·¸ì¸ ì—¬ë¶€ í™•ì¸
 			if(session != null && session.getAttribute("loginId") != null) {
 				
-				// ÀÀ´ä
+				// ì‘ë‹µ
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
-				out.println("alert('ÇØ´ç ±â´ÉÀº »ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù.');");
+				out.println("alert('í•´ë‹¹ ê¸°ëŠ¥ì€ ì‚¬ìš©í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.');");
 				out.println("history.back();");
 				out.println("</script>");
 				out.flush();
 				out.close();
 				
-				return false; // ÄÁÆ®·Ñ·¯ÀÇ ¿äÃ»ÀÌ Ã³¸®µÇÁö ¾Ê´Â´Ù.
+				return false; // ì»¨íŠ¸ë¡¤ëŸ¬ì˜ ìš”ì²­ì´ ì²˜ë¦¬ë˜ì§€ ì•ŠëŠ”ë‹¤.
 			}
 
-			return true; // ÄÁÆ®·Ñ·¯ÀÇ ¿äÃ»ÀÌ Ã³¸®µÈ´Ù. 
+			return true; // ì»¨íŠ¸ë¡¤ëŸ¬ì˜ ìš”ì²­ì´ ì²˜ë¦¬ëœë‹¤.
 		
 		}
 

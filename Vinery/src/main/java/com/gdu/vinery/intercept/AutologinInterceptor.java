@@ -16,9 +16,9 @@ import com.gdu.vinery.mapper.UserMapper;
 @Component
 public class AutologinInterceptor implements HandlerInterceptor {
 	
-	// ·Î±×ÀÎÀÌ ¾È µÈ »óÅÂÀÌ°í,
-	  // ÄíÅ°¿¡ autologinId °ªÀÌ Á¸ÀçÇÏ´Â °æ¿ì¿¡
-	  // ÀÚµ¿ ·Î±×ÀÎÀ» ¼öÇàÇÏ´Â ÀÎÅÍ¼ÁÅÍ
+	  // ë¡œê·¸ì¸ì´ ì•ˆ ëœ ìƒíƒœì´ê³ ,
+	  // ì¿ í‚¤ì— autologinId ê°’ì´ ì¡´ì¬í•˜ëŠ” ê²½ìš°ì—
+	  // ìë™ ë¡œê·¸ì¸ì„ ìˆ˜í–‰í•˜ëŠ” ì¸í„°ì…‰í„°
 	  
 	  @Autowired
 	  private UserMapper userMapper;
@@ -28,11 +28,11 @@ public class AutologinInterceptor implements HandlerInterceptor {
 
 	    HttpSession session = request.getSession();
 	    
-	    if(session != null && session.getAttribute("loginId") == null) {  // ·Î±×ÀÎÀÌ µÇ¾î ÀÖ´Â°¡?
+	    if(session != null && session.getAttribute("loginId") == null) {  // ë¡œê·¸ì¸ì´ ë˜ì–´ ìˆëŠ”ê°€?
 	      
-	      Cookie cookie = WebUtils.getCookie(request, "userAutologinId");	// ÇØ´ç ÄíÅ° ÄÚµå°¡Á®¿À´Â ÄÚµå
+	      Cookie cookie = WebUtils.getCookie(request, "userAutologinId");	
 	      
-	      if(cookie != null) {  // ÄíÅ° userAutologinId°¡ Á¸ÀçÇÏ´Â°¡?
+	      if(cookie != null) {  // ì¿ í‚¤ autologinIdê°€ ì¡´ì¬í•˜ëŠ”ê°€?
 	        
 	        String userAutologinId = cookie.getValue();
 	        UserDTO loginUserDTO = userMapper.selectAutologin(userAutologinId);
@@ -44,7 +44,7 @@ public class AutologinInterceptor implements HandlerInterceptor {
 	      
 	    }
 	    
-	    return true;  // ÀÎÅÍ¼ÁÅÍ¸¦ µ¿ÀÛ ½ÃÅ² µÚ ÄÁÆ®·Ñ·¯¸¦ °è¼Ó µ¿ÀÛ½ÃÅ²´Ù.
+	    return true;  // ì¸í„°ì…‰í„°ë¥¼ ë™ì‘ ì‹œí‚¨ ë’¤ ì»¨íŠ¸ë¡¤ëŸ¬ë¥¼ ê³„ì† ë™ì‘ì‹œí‚¨ë‹¤.
 	    
 	  }
 

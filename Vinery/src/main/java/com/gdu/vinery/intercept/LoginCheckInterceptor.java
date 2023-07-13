@@ -12,21 +12,22 @@ import org.springframework.web.servlet.HandlerInterceptor;
 @Component
 public class LoginCheckInterceptor implements HandlerInterceptor {
 	
-	// ·Î±×ÀÎ ¿©ºÎ¸¦ È®ÀÎÇØ¼­ ·Î±×ÀÎÀÌ µÇ¾î ÀÖÁö ¾ÊÀ¸¸é ·Î±×ÀÎ ÆäÀÌÁö·Î ÀÌµ¿½ÃÅ°´Â ÀÎÅÍ¼ÁÅÍ 
+		// ë¡œê·¸ì¸ ì—¬ë¶€ë¥¼ í™•ì¸í•´ì„œ
+	  	// ë¡œê·¸ì¸ì´ ë˜ì–´ ìˆì§€ ì•Šìœ¼ë©´ ë¡œê·¸ì¸ í˜ì´ì§€ë¡œ ì´ë™ì‹œí‚¤ëŠ” ì¸í„°ì…‰í„°
 	
-		@Override	// preHandle : ÀÌÀü
+		@Override	// preHandle : 
 		public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 			
 			HttpSession session = request.getSession();
 			
-			// ·Î±×ÀÎ ¿©ºÎ È®ÀÎ
+			// ë¡œê·¸ì¸ ì—¬ë¶€ í™•ì¸
 			if(session != null && session.getAttribute("loginId") == null) {
 				
-				// ÀÀ´ä
+				// ì‘ë‹µ
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
 				out.println("<script>");
-				out.println("if(confirm('·Î±×ÀÎÀÌ ÇÊ¿äÇÑ ±â´ÉÀÔ´Ï´Ù. ·Î±×ÀÎÇÏ½Ã°Ú½À´Ï±î?')){");
+				out.println("if(confirm('ë¡œê·¸ì¸ì´ í•„ìš”í•œ ê¸°ëŠ¥ì…ë‹ˆë‹¤. ë¡œê·¸ì¸í•˜ì‹œê² ìŠµë‹ˆê¹Œ?')){");
 				out.println("location.href='"+ request.getContextPath()+"/users/login.form';");
 				out.println("} else {");
 				out.println("history.back();");
@@ -35,12 +36,12 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 				out.flush();
 				out.close();
 				
-				return false; // ÄÁÆ®·Ñ·¯ÀÇ ¿äÃ»ÀÌ Ã³¸®µÇÁö ¾Ê´Â´Ù.
+				return false; // ì»¨íŠ¸ë¡¤ëŸ¬ì˜ ìš”ì²­ì´ ì²˜ë¦¬ë˜ì§€ ì•ŠëŠ”ë‹¤.
 				
 			}
 
 			
-			return true; // ÄÁÆ®·Ñ·¯ÀÇ ¿äÃ»ÀÌ Ã³¸®µÈ´Ù. 
+			return true; // ì»¨íŠ¸ë¡¤ëŸ¬ì˜ ìš”ì²­ì´ ì²˜ë¦¬ëœë‹¤.
 		}
 
 }

@@ -93,12 +93,16 @@ COMMIT;
 CREATE TABLE USERS (
     USER_NO              NUMBER             NOT NULL,           -- 회원 번호
     USER_ID             VARCHAR2(20 BYTE)   NOT NULL UNIQUE,    -- 회원 아이디
-    USER_PW             VARCHAR2(20 BYTE)   NOT NULL,            -- 비밀번호
+    USER_PW             VARCHAR2(100 BYTE)   NOT NULL,          -- 비밀번호
     USER_NAME           VARCHAR2(20 BYTE),                      -- 이름       
     USER_TEL             VARCHAR2(20 BYTE),                     -- 휴대폰 번호 하이픈 제외(-) 후 저장
+    
     USER_POST            VARCHAR2(7 BYTE),                      -- 우편 번호
-    USER_ADDRESS         VARCHAR2(50 BYTE),                     -- 주소
-    USER_ADDR_DETAIL     VARCHAR2(80 BYTE),                     -- 상세 주소
+    USER_ROAD_ADDRESS    VARCHAR2(100 BYTE),                    -- 도로명주소
+    USER_JIBUN_ADDRESS   VARCHAR2(100 BYTE),                    -- 지번주소
+    USER_DETAIL_ADDRESS  VARCHAR2(100 BYTE),                    -- 상세주소
+    USER_EXTRA_ADDRESS   VARCHAR2(100 BYTE),                    -- 참고항목
+    
     USER_EMAIL           VARCHAR2(40 BYTE)  NOT NULL,           -- 이메일
     USER_BIRTH           VARCHAR2(12 BYTE),                     -- 생년월일
     USER_GENDER          VARCHAR2(6 BYTE),                      -- 성별 M(남), F(여), NO(선택안함)
@@ -111,20 +115,24 @@ CREATE TABLE USERS (
     CONSTRAINT PK_USERS PRIMARY KEY(USER_NO)
 );
 
-INSERT INTO USERS VALUES(USERS_SEQ.NEXTVAL, 'admin', '1111', '관리자', '01012345678', '24223', '와인시 소주구 맥주동', '알콜아파트 101동 111호', 'qwe123@naver.com', '90-12-31', 'F', SYSDATE, 0, 0, SYSDATE, NULL, NULL);
-INSERT INTO USERS VALUES(USERS_SEQ.NEXTVAL, 'hyunju', '1111', '이현주', '01088888888', '24221', '서울시 금천구 가산동', '바이너리 101호', 'parkhy0sh1n@naver.com', '99-08-08', 'M', SYSDATE, 0, 0, SYSDATE, NULL, NULL);
+INSERT INTO USERS VALUES(USERS_SEQ.NEXTVAL, 'admin', '1111', '관리자', '01012345678', '24223', '강원도', '와인시 소주구 맥주동', '알콜아파트 101동 111호', '1층', 'qwe123@naver.com', '90-12-31', 'F', SYSDATE, 0, 0, SYSDATE, NULL, NULL);
+INSERT INTO USERS VALUES(USERS_SEQ.NEXTVAL, 'hyunju', '1111', '이현주', '01088888888', '24221', '강원도', '서울시 금천구 가산동', '바이너리 101호', '2층', 'parkhy0sh1n@naver.com', '99-08-08', 'M', SYSDATE, 0, 0, SYSDATE, NULL, NULL);
 COMMIT;
 
 -- 휴면회원
 CREATE TABLE SLEEP_USERS (
     USER_NO              NUMBER              NOT NULL,           -- 회원 번호
     USER_ID              VARCHAR2(20 BYTE)   NOT NULL UNIQUE,    -- 회원 아이디
-    USER_PW              VARCHAR2(20 BYTE)   NOT NULL,           -- 비밀번호
+    USER_PW              VARCHAR2(100 BYTE)   NOT NULL,           -- 비밀번호
     USER_NAME            VARCHAR2(20 BYTE),                      -- 이름       
     USER_TEL             VARCHAR2(20 BYTE),                      -- 휴대폰 번호 하이픈 제외(-) 후 저장
-    USER_POST            VARCHAR2(7 BYTE),                       -- 우편 번호
-    USER_ADDRESS         VARCHAR2(50 BYTE),                      -- 주소
-    USER_ADDR_DETAIL     VARCHAR2(80 BYTE),                      -- 상세 주소
+    
+    USER_POST            VARCHAR2(7 BYTE),                      -- 우편 번호
+    USER_ROAD_ADDRESS    VARCHAR2(100 BYTE),                    -- 도로명주소
+    USER_JIBUN_ADDRESS   VARCHAR2(100 BYTE),                    -- 지번주소
+    USER_DETAIL_ADDRESS  VARCHAR2(100 BYTE),                    -- 상세주소
+    USER_EXTRA_ADDRESS   VARCHAR2(100 BYTE),                    -- 참고항목
+    
     USER_EMAIL           VARCHAR2(40 BYTE)   NOT NULL,           -- 이메일
     USER_BIRTH           VARCHAR2(12 BYTE),                      -- 생년월일
     USER_GENDER          VARCHAR2(6 BYTE),                       -- 성별 M(남), F(여), NO(선택안함)
